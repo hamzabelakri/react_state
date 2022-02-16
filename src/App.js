@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import image from "./images/John.jpg";
+export default class App extends Component {
+  state = {
+    fullName: "Johw Wick",
+    Bio: "A legenday assassin",
+    profession: "Hitman",
+    imgSrc: image,
+    show: false,
+    counter: 0,
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  ingrement = () => {
+
+    this.setState({ counter: this.state.counter + 1 });
+
+  }
+  Show = () => {
+    if(this.state.show){
+      this.setState({ show: false })
+    }
+    else{
+      this.setState({ show: true });
+      setInterval(
+        this.ingrement,1000);
+    }  
+
+this.setState({ counter: 0});
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.show ? (
+          <div>
+            <p>{this.state.fullName}</p>
+            <p>{this.state.Bio}</p>
+            <p>{this.state.profession}</p>
+            <img src={this.state.imgSrc} />
+            <h1>{this.state.counter}</h1>
+          </div>
+        ) : null}
+        <button onClick={this.Show}>Click</button>
+        <p></p>
+      </div>
+    );
+  }
 }
-
-export default App;
